@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackForge - Cybersecurity Infinite Challenge</title>
+    <link rel = "stylesheet" href = "css/has.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">HACKFORGE ∞</div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="level-display">1</div>
+                    <div class="stat-label">LEVEL</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="score-display">0</div>
+                    <div class="stat-label">SCORE</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="lives-display">3</div>
+                    <div class="stat-label">NYAWA</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="streak-display">0</div>
+                    <div class="stat-label">STREAK</div>
+                </div>
+            </div>
+        </header>
+        
+        <div class="game-area">
+            <div class="main-content">
+                <div class="level-container">
+                    <div class="level-header">
+                        <h2 class="level-title" id="level-title">Level 1: Password Cracking Dasar</h2>
+                        <div class="difficulty-badge difficulty-easy" id="difficulty-badge">MUDAH</div>
+                    </div>
+                    <p class="level-description" id="level-description">
+                        Sebuah perusahaan kecil menjadi korban serangan siber. Anda harus memecahkan password administrator untuk mengamankan sistem.
+                    </p>
+                    
+                    <div class="difficulty-meter">
+                        <div class="difficulty-fill" id="difficulty-fill"></div>
+                    </div>
+                    
+                    <div class="challenge-area" id="challenge-area">
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">hackforge@root:~$ </span>
+                            <span class="terminal-command">scan_target --ip 192.168.1.45</span>
+                        </div>
+                        <div class="terminal-line terminal-output">
+                            [+] Target teridentifikasi: Server Perusahaan XYZ
+                        </div>
+                        <div class="terminal-line terminal-output">
+                            [+] Port terbuka: 22, 80, 443
+                        </div>
+                        <div class="terminal-line terminal-output">
+                            [+] Vulnerability detected: Weak password hashing
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">hackforge@root:~$ </span>
+                            <span class="terminal-command">hash_crack --type md5 --hash 5f4dcc3b5aa765d61d8327deb882cf99</span>
+                        </div>
+                        <div class="terminal-line terminal-output">
+                            [+] Memulai proses cracking...
+                        </div>
+                        <div class="terminal-line terminal-output">
+                            [+] Dictionary attack in progress...
+                        </div>
+                    </div>
+                    
+                    <div class="input-area">
+                        <input type="text" class="input-field" id="answer-input" placeholder="Masukkan jawaban...">
+                        <button class="btn" id="submit-btn">Submit</button>
+                        <button class="btn btn-warning" id="hint-btn">Hint</button>
+                        <button class="btn btn-danger" id="skip-btn">Skip</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="hint-container">
+                    <h3 class="sidebar-title">PETUNJUK</h3>
+                    <div class="hint-text" id="hint-text">
+                        Hash MD5 ini adalah hash untuk password yang sangat umum digunakan. Coba pikirkan password paling populer yang terdiri dari 8 karakter.
+                    </div>
+                </div>
+                
+                <div class="lives-container">
+                    <h3 class="sidebar-title">NYAWA</h3>
+                    <div class="life" id="life-1"></div>
+                    <div class="life" id="life-2"></div>
+                    <div class="life" id="life-3"></div>
+                </div>
+                
+                <div class="achievements-container">
+                    <h3 class="sidebar-title">PENCAPAIAN</h3>
+                    <div class="hint-text" id="achievements-text">
+                        • Level 5: Script Kiddie
+                        <br>• Level 10: Junior Hacker
+                        <br>• Level 25: Security Analyst
+                        <br>• Level 50: Pentester
+                        <br>• Level 100: Elite Hacker
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Achievement Notification -->
+    <div class="achievement" id="achievement-notification">
+        <div class="achievement-title" id="achievement-title">Pencapaian Terbuka!</div>
+        <div id="achievement-description">Anda telah mencapai level 5!</div>
+    </div>
+    
+    <!-- Modal for level completion -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <h2 class="modal-title" id="success-title">LEVEL BERHASIL!</h2>
+            <p class="modal-message" id="success-message">Selamat! Anda berhasil memecahkan password.</p>
+            <div class="modal-message">
+                <strong>Skor: +<span id="score-earned">0</span></strong>
+                <br>Streak: <span id="streak-count">0</span>
+            </div>
+            <button class="btn" id="next-level-btn">Level Berikutnya</button>
+        </div>
+    </div>
+    
+    <!-- Modal for game over -->
+    <div class="modal" id="game-over-modal">
+        <div class="modal-content">
+            <h2 class="modal-title">GAME OVER</h2>
+            <p class="modal-message">Nyawa Anda telah habis. Mulai dari awal?</p>
+            <p class="modal-message">Level Tertinggi: <span id="highest-level">1</span></p>
+            <button class="btn" id="restart-btn">Mulai Ulang</button>
+        </div>
+    </div>
+    
+    <script src = "js/hash.js"></script>
+</body>
+</html>

@@ -234,7 +234,7 @@ def animate_selection(choice):
         2: "Requirements Installation", 
         3: "Running HackForge",
         4: "Run Web Script (PHP Admin)",
-        5: "Run Main Script (Games)",
+        5: "Run Ekploitasi Hacking (Games)",
         6: "Exit"
     }
     
@@ -375,7 +375,7 @@ def show_menu():
         f"  {Colors.GREEN}2{Colors.RESET} - Install py requirements.txt", 
         f"  {Colors.GREEN}3{Colors.RESET} - Running Now HackForge (skip instalasi)",
         f"  {Colors.GREEN}4{Colors.RESET} - Run Web Script (PHP Admin)",
-        f"  {Colors.GREEN}5{Colors.RESET} - Run Main Script (Games)",
+        f"  {Colors.GREEN}5{Colors.RESET} - Run Ekploitasi Hacking (Games)",
         f"  {Colors.GREEN}6{Colors.RESET} - Keluar"
     ]
     
@@ -791,7 +791,7 @@ def main():
                 
             elif choice == 4:
                 # Jalankan web/main.sh
-                run_bash_script("web/main.sh", "Web Script")
+                run_bash_script("main.sh", "Web Script")
                 break
                 
             elif choice == 5:

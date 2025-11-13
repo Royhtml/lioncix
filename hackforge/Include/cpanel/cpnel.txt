@@ -1,3 +1,0 @@
-cPanel Scan Results for https://ubsi.ac.id
-==================================================
-https://ubsi.ac.id/index.php [200]

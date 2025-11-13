@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackForge - Infinite Cybersecurity Challenge</title>
+    <link rel = "stylesheet" href = "css/index.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">HACKFORGE ∞</div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="level-display">1</div>
+                    <div class="stat-label">LEVEL</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="score-display">0</div>
+                    <div class="stat-label">SCORE</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="lives-display">3</div>
+                    <div class="stat-label">NYAWA</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="streak-display">0</div>
+                    <div class="stat-label">STREAK</div>
+                </div>
+                <div class="timer" id="timer">02:00:00</div>
+            </div>
+        </header>
+        
+        <div class="game-area">
+            <div class="main-content">
+                <div class="level-container">
+                    <div class="level-header">
+                        <h2 class="level-title" id="level-title">Level 1: Password Cracking Dasar</h2>
+                        <div class="difficulty-badge difficulty-easy" id="difficulty-badge">MUDAH</div>
+                    </div>
+                    <p class="level-description" id="level-description">
+                        Sebuah perusahaan kecil menjadi korban serangan siber. Anda harus memecahkan password administrator untuk mengamankan sistem.
+                    </p>
+                    
+                    <div class="difficulty-meter">
+                        <div class="difficulty-fill" id="difficulty-fill"></div>
+                    </div>
+                    
+                    <div class="complexity-indicators" id="complexity-indicators">
+                        <!-- Complexity dots will be generated here -->
+                    </div>
+                    
+                    <div class="challenge-area" id="challenge-area">
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">hackforge@root:~$ </span>
+                            <span class="terminal-command">scan_target --ip 192.168.1.45</span>
+                        </div>
+                        <div class="terminal-line terminal-output">
+                            [+] Target teridentifikasi: Server Perusahaan XYZ
+                        </div>
+                        <div class="terminal-line terminal-output">
+                            [+] Port terbuka: 22, 80, 443
+                        </div>
+                        <div class="terminal-line terminal-output">
+                            [+] Vulnerability detected: Weak password hashing
+                        </div>
+                        <div class="terminal-line">
+                            <span class="terminal-prompt">hackforge@root:~$ </span>
+                            <span class="terminal-command">hash_crack --type md5 --hash 5f4dcc3b5aa765d61d8327deb882cf99</span>
+                        </div>
+                        <div class="terminal-line terminal-output">
+                            [+] Memulai proses cracking...
+                        </div>
+                        <div class="terminal-line terminal-output">
+                            [+] Dictionary attack in progress...
+                        </div>
+                    </div>
+                    
+                    <div class="input-area">
+                        <input type="text" class="input-field" id="answer-input" placeholder="Masukkan jawaban...">
+                        <button class="btn" id="submit-btn">Submit</button>
+                        <button class="btn btn-warning" id="hint-btn">Hint</button>
+                        <button class="btn btn-danger" id="skip-btn">Skip</button>
+                        <button class="btn btn-info" id="solve-btn">Solve</button>
+                    </div>
+                    
+                    <div class="time-bonus" id="time-bonus">
+                        Time Bonus: +0 points
+                    </div>
+                </div>
+            </div>
+            
+            <div class="sidebar">
+                <div class="hint-container">
+                    <h3 class="sidebar-title">PETUNJUK</h3>
+                    <div class="hint-text" id="hint-text">
+                        Hash MD5 ini adalah hash untuk password yang sangat umum digunakan. Coba pikirkan password paling populer yang terdiri dari 8 karakter.
+                    </div>
+                </div>
+                
+                <div class="lives-container">
+                    <h3 class="sidebar-title">NYAWA</h3>
+                    <div class="life" id="life-1"></div>
+                    <div class="life" id="life-2"></div>
+                    <div class="life" id="life-3"></div>
+                </div>
+                
+                <div class="progress-section">
+                    <h3 class="sidebar-title">MILESTONE</h3>
+                    <div class="milestone" id="milestone-5">Level 5: Script Kiddie</div>
+                    <div class="milestone" id="milestone-10">Level 10: Junior Hacker</div>
+                    <div class="milestone" id="milestone-25">Level 25: Security Analyst</div>
+                    <div class="milestone" id="milestone-50">Level 50: Pentester</div>
+                    <div class="milestone" id="milestone-100">Level 100: Elite Hacker</div>
+                    <div class="milestone" id="milestone-150">Level 150: Cyber Warrior</div>
+                    <div class="milestone" id="milestone-200">Level 200: Digital Legend</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Achievement Notification -->
+    <div class="achievement" id="achievement-notification">
+        <div class="achievement-title" id="achievement-title">Pencapaian Terbuka!</div>
+        <div id="achievement-description">Anda telah mencapai level 5!</div>
+    </div>
+    
+    <!-- Modal for level completion -->
+    <div class="modal" id="success-modal">
+        <div class="modal-content">
+            <h2 class="modal-title" id="success-title">LEVEL BERHASIL!</h2>
+            <p class="modal-message" id="success-message">Selamat! Anda berhasil memecahkan tantangan.</p>
+            <div class="modal-message">
+                <strong>Skor: +<span id="score-earned">0</span></strong>
+                <br>Streak: <span id="streak-count">0</span>
+                <br>Time Bonus: +<span id="time-bonus-earned">0</span>
+            </div>
+            <button class="btn" id="next-level-btn">Level Berikutnya</button>
+        </div>
+    </div>
+    
+    <!-- Modal for game over -->
+    <div class="modal" id="game-over-modal">
+        <div class="modal-content">
+            <h2 class="modal-title">GAME OVER</h2>
+            <p class="modal-message" id="game-over-message">Nyawa Anda telah habis. Mulai dari awal?</p>
+            <p class="modal-message">Level Tertinggi: <span id="highest-level">1</span></p>
+            <p class="modal-message">Total Skor: <span id="final-score">0</span></p>
+            <button class="btn" id="restart-btn">Mulai Ulang</button>
+        </div>
+    </div>
+    
+    <!-- Modal for time up -->
+    <div class="modal" id="time-up-modal">
+        <div class="modal-content">
+            <h2 class="modal-title">WAKTU HABIS!</h2>
+            <p class="modal-message">Waktu 2 jam telah habis. Pertahankan progres Anda?</p>
+            <p class="modal-message">Level Tertinggi: <span id="time-up-level">1</span></p>
+            <p class="modal-message">Total Skor: <span id="time-up-score">0</span></p>
+            <button class="btn" id="continue-btn">Lanjutkan Tanpa Timer</button>
+            <button class="btn btn-danger" id="new-game-btn">Game Baru</button>
+        </div>
+    </div>
+    
+    <script src="js/index.js"></script>
+
+</body>
+</html>
