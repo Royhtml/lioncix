@@ -178,14 +178,13 @@ I hereby certify that, to the best of my knowledge, the artifacts identified in 
 **Signature (digital):**
 `-----BEGIN PGP SIGNATURE-----\n{{ASCII_ARMOR_SIGNATURE}}\n-----END PGP SIGNATURE-----`
 
----
 
 ## 13. Change Log for this Certificate
 
 * **{{YYYY-MM-DD}}:** Certificate created for release `{{RELEASE_TAG_OR_VERSION}}`.
 * **{{YYYY-MM-DD}}:** (example) Rotated signing key; updated public key fingerprint.
 
----
+
 
 ## 14. References & Helpful Commands
 
@@ -194,7 +193,6 @@ I hereby certify that, to the best of my knowledge, the artifacts identified in 
 * Create GPG detached signature: `gpg --detach-sign --armor CHECKSUMS.txt`
 * Verify signature: `gpg --verify CHECKSUMS.txt.asc CHECKSUMS.txt`
 
----
 
 ## 15. Template Variables (replace before publishing)
 
@@ -206,13 +204,5 @@ I hereby certify that, to the best of my knowledge, the artifacts identified in 
 * `{{PGP_KEY_FINGERPRINT}}` — issuer public key fingerprint
 * `{{LICENSE_NAME}}` — e.g., MIT, Apache-2.0
 * `{{ASCII_ARMOR_SIGNATURE}}` — ascii-armored PGP signature block
-
----
-
-If you would like, I can:
-
-* Fill in the template with real values from a GitHub release or your local build artifacts (if you provide them),
-* Produce a PDF/print-ready certificate with the same content, or
-* Generate a signed `CHECKSUMS.txt.asc` file example (you must provide the public key or allow me to show commands only).
 
 *End of certificate.md*
