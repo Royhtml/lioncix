@@ -1,0 +1,7 @@
+requests
+dnspython
+tqdm
+argparse
+tabulate
+urllib3
+beautifulsoup4

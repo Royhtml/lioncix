@@ -250,8 +250,7 @@ def animate_selection(choice):
         3: "Running HackForge",
         4: "Run Web Script (PHP Admin)",
         5: "Run Exploitation Hacking (Games)",
-        6: "Run Token Generator (JWT)",
-        7: "Exit"
+        6: "Exit"
     }
     
     text = f"Memilih: {choices[choice]}"
@@ -693,7 +692,7 @@ def run_hackforge():
     
     # Cek berbagai kemungkinan file main
     possible_files = [
-        "hackforge/src/main.py",
+        "src/main.py",
         "main.py",
         "hackforge.py",
         "HackForge.py",
@@ -814,7 +813,7 @@ def main():
                 break
             
             elif choice == 6:
-                # Jalankan main/main.py
+                # Jalankan Token/main.py
                 run_python_script("hackforge/Token/main.py", "Main Script")
                 break
                 

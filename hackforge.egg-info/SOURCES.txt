@@ -1,0 +1,14 @@
+README.md
+license.md
+setup.py
+hackforge/__init__.py
+hackforge/cli.py
+hackforge/gui.py
+hackforge/main.py
+hackforge/server.py
+hackforge.egg-info/PKG-INFO
+hackforge.egg-info/SOURCES.txt
+hackforge.egg-info/dependency_links.txt
+hackforge.egg-info/entry_points.txt
+hackforge.egg-info/requires.txt
+hackforge.egg-info/top_level.txt
