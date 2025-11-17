@@ -11,6 +11,7 @@ lioncix/__init__.py
 lioncix/cli.py
 lioncix/gui.py
 lioncix/hackforge_icon.ico
+lioncix/lion.png
 lioncix/mainpy.py
 lioncix/server.py
 lioncix.egg-info/PKG-INFO

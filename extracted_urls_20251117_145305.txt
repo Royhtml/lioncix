@@ -1,0 +1,26 @@
+URLs extracted from: https://repository.bsi.ac.id/login
+Extracted at: Mon Nov 17 14:53:05 2025
+
+INTERNAL URLs:
+https://repository.bsi.ac.id/assets/themes/repo/images/logoubsi.png
+https://repository.bsi.ac.id/assets/node_modules/bootstrap/dist/js/bootstrap.min.js
+https://repository.bsi.ac.id/assets/node_modules/jquery/jquery-3.2.1.min.js
+https://repository.bsi.ac.id/login
+https://repository.bsi.ac.id/assets/node_modules/wizard/jquery.validate.min.js
+https://repository.bsi.ac.id/assets/icons/font-awesome/css/all.min.css
+https://repository.bsi.ac.id/assets/css/bootstrap-5.css
+https://repository.bsi.ac.id/assets/js/sweetalert.js
+https://repository.bsi.ac.id/assets/js/app-login-vessel.js
+https://repository.bsi.ac.id/assets/img/favicon.ico
+https://repository.bsi.ac.id
+https://repository.bsi.ac.id/login/google
+https://repository.bsi.ac.id/assets/icons/flaticon/flaticon.css
+https://repository.bsi.ac.id/assets/node_modules/popper/popper.min.js
+https://repository.bsi.ac.id/assets/svg/loading.svg
+
+EXTERNAL URLs:
+https://fonts.googleapis.com
+https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap
+https://fonts.gstatic.com
+
+RELATIVE URLs:

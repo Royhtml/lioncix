@@ -695,8 +695,8 @@ def run_hackforge():
     
     # Cek berbagai kemungkinan file main
     possible_files = [
-        "src/main.py",
-        "main.py",
+        "hackforge/src/main.py",
+        "hackforge/mainpy.py",
         "hackforge.py",
         "HackForge.py",
         "tool.py"

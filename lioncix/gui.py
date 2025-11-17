@@ -240,19 +240,39 @@ class HackForgeLauncher:
             self.speech_manager.speak(text)
 
     def setup_video(self):
-        """Setup video playback in the video frame"""
-        video_path = r"C:\Users\User\Downloads\streamlit_launcher\streamlit_launcher\assets\intro.mp4"
-        
-        if os.path.exists(video_path):
+        """Tampilkan gambar sebagai pengganti video intro"""
+        image_path = r"C:\Users\User\Downloads\lioncix\lioncix\hackforge\lion.png"
+
+        if os.path.exists(image_path):
             try:
-                self.video_capture = cv2.VideoCapture(video_path)
-                self.update_video_frame()
+                image = cv2.imread(image_path)
+                if image is not None:
+                    # Konversi BGR->RGB
+                    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+
+                    # Convert ke PIL
+                    img = Image.fromarray(image)
+                    img = img.resize((800, 450))  # Atur ukuran sesuai kebutuhan
+
+                    # Convert ke ImageTk
+                    self.photo = ImageTk.PhotoImage(img)
+
+                    # Tampilkan ke label/frame
+                    self.video_label.configure(image=self.photo)
+                    self.video_label.image = self.photo
+
+                else:
+                    print("[WARNING] Tidak bisa membuka gambar, memanggil fallback.")
+                    self.load_image_fallback()
+
             except Exception as e:
-                print(f"[WARNING] Gagal load video: {e}")
+                print(f"[WARNING] Gagal load gambar: {e}")
                 self.load_image_fallback()
+
         else:
-            print("[WARNING] File video tidak ditemukan, menggunakan gambar fallback.")
+            print("[WARNING] File gambar tidak ditemukan, memanggil fallback.")
             self.load_image_fallback()
+
 
     def load_image_fallback(self):
         """Load fallback image if video is not available"""
